@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>StartUp Circle - join a circle, start a business!</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+      <div id="nav">
+        <ul>
+            <li><a href="/" id="logo">StartUp Circle - join a circle, start a business!</a></li>
+            <li><a href="/circles/find_circle">FIND A CIRCLE</a></li>
+            <li><a href="/circles/add_circle">CREATE A CIRCLE</a></li>
+            {% if status == True %}
+            <li><a href="/users/logout">LOG OUT</a></li>
+            {% else %}
+            <li><a href="/users/login">LOG IN</a></li>
+            {% endif %}
+        </ul>
+      </div>
+      
+    
+      <div class="side_menu">
+     {% if status == True %}
+        User Menu
+        <br/>
+        <div class="avatar_side_menu">
+          <img src="../static/uploads/user{{ user[0] }}.png"
+          onerror="this.src='../static/uploads/anonymous_user_photo.png'" />
+        </div>
+        {{ user[2] }} {{ user[3] }}
+        <br/>
+        {{ user[6] }}
+        <br/>
+        {{ user[8] }}
+        <br/>
+        {{ username }}
+        <br/>
+        <div class="button1"><a href = "/users/account">Account</a></div>
+        <div class="button1"><a href = "/users/logout">Log out</a></div>
+
+        {% else %}
+        User Menu
+        <br/>
+        <div class="avatar_side_menu">
+          <img src="../static/uploads/anonymous_user_photo.png"/>
+        </div>
+        Anonymous user
+        <br/>
+        <div class="button1"><a href = "/users/login">Log in</a></div>
+        <div class="button1"><a href = "/users/register">Register</a></div>
+
+        {% endif %}
+     </div>   
+    
+    
+     <div class="content">
+     
+     {% for item in newest_circles %}
+          <article>
+            <div class="photo"><img src="../static/uploads/circle{{ item[0] }}.png"
+            onerror="this.src='../static/uploads/no_photo.png'" />
+            </div>
+            <h2>{{ item[3] }} ( ID: {{ item[0] }} )</h2>
+            <div class="info">
+            Leader contact: {{ item[1] }}<br/>
+            Published: {{ item[5] }}<br/>
+            Valid until: {{ item[6] }}<br/>
+            Investment needed: {{ item[7] }}<br/>
+            Members involved: 1<br/>
+            Members interested: 0<br/>
+            </div> 
+            <div class="button1">
+              <a href="/circles/{{ item[0] }}">See more</a>
+            </div>
+          </article>
+     {% endfor %}
+
+      {% if last_page == 0 %}
+      <br/>
+      <div id="button1">
+        <a href="/page/{{ num }}" >Next page</a> 
+      </div>
+      <br/>
+      <br/>
+      {% endif %}
+
+     </div>
+  </body>
+</html>

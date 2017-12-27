@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>StartUp Circle - join a circle, start a business!</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+      <div id="nav">
+        <ul>
+            <li><a href="/" id="logo">StartUp Circle - join a circle, start a business!</a></li>
+            <li><a href="/circles/find_circle">FIND A CIRCLE</a></li>
+            <li><a href="/circles/add_circle">CREATE A CIRCLE</a></li>
+            {% if status == True %}
+            <li><a href="/users/logout">LOG OUT</a></li>
+            {% else %}
+            <li><a href="/users/login">LOG IN</a></li>
+            {% endif %}
+        </ul>
+      </div>
+      
+    
+      <div class="side_menu">
+     {% if status == True %}
+        User Menu
+        <br/>
+        <div class="avatar_side_menu">
+          <img src="../static/uploads/user{{ user[0] }}.png"
+          onerror="this.src='../static/uploads/anonymous_user_photo.png'" />
+        </div>
+        {{ user[2] }} {{ user[3] }}
+        <br/>
+        {{ user[6] }}
+        <br/>
+        {{ user[8] }}
+        <br/>
+        ( {{ username }} )
+        <br/>
+        <div class="button1"><a href = "/users/account">Account</a></div>
+        <div class="button1"><a href = "/users/logout">Log out</a></div>
+
+        {% else %}
+        User Menu
+        <br/>
+        <div class="avatar_side_menu">
+          <img src="static/uploads/anonymous_user_photo.png"/>
+        </div>
+        {{ username }}
+        <br/>
+        <div class="button1"><a href = "/users/account">Account</a></div>
+        <div class="button1"><a href = "/users/logout">Log in</a></div>
+
+        {% endif %}
+     </div>   
+    
+     <div class="content">
+          <div id = "user">
+            <div class="avatar_side_menu"><img src="../static/uploads/user{{
+            user[0] }}.png"
+            onerror="this.src='../static/uploads/anonymous_user_photo.png'" />
+            </div>
+            <h2>{{ user[2] }} {{ user[3] }}</h2>
+           
+           <div class="info">
+            Town: {{ user[6] }}<br/>
+            Country: {{ user[8] }}<br/>
+            <br/>
+            E-mail: {{ user[0] }}<br/>
+            Phone: {{ user[9] }}<br/>
+            </div> 
+
+            <br/>
+            <p>
+            About me: {{ user[10] }}<br/>
+            </p>
+            <br/>
+          </div>
+
+     </div>
+  </body>
+</html>
